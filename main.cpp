@@ -1,12 +1,20 @@
 #include <iostream>
 #include <cstring>
+#include <math.h>
+#include <fstream>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
 void manuallyAdd(int* array, int &curr);
 void heap(int* array, int &curr);
+void print(int* array);
+void addFile(int* array, int &curr);
 
 int main() {
+  srand(time(0));
   cout << "Welcome to heap" << endl;
   int *array = new int[100];
   int curr = 0;
@@ -28,13 +36,27 @@ int main() {
       
     }
     else if (strcmp(input, "PRINT") == 0) {//Calls the print function
-      
+      print(array);
     }
     else if (strcmp(input, "QUIT") == 0) {//Returns false
       playing = false;//Exits while Loop stopping game
     }
   }
   return 0;
+}
+
+void addFile(int* array, int &curr) {
+  for (int i = 0; i < 100; i++) {
+    char input[10];
+    int count = 1;
+    int randomnum = (rand() % 50) + 1;
+    fstream myfile("numberFile.txt");
+    while (myfile.getline(input,10, ' ')) {
+      if (count == randomnum) {
+	
+      }
+    }
+  }
 }
 
 void manuallyAdd(int* array, int &curr) {
@@ -47,17 +69,28 @@ void manuallyAdd(int* array, int &curr) {
   }
   else {
     array[curr] = num;
-    //heap()
+    heap(array, curr);
     curr++;
   }
 
 }
 
+void display(int* array) {
+  
+}
+
+void print(int* array) {
+  for (int i = 0; i < 100; i ++) {
+    cout << array[i] << endl;
+  }
+}
+
 void heap(int* array, int &curr) {
-  if (array[curr] > array[(curr-1)/2]) {
+  if (array[curr] > array[(int) floor((curr-1)/2)]) {
     int temp = array[curr];
-    array[curr] = array[(curr-1)/2];
-    array[(curr-1)/2] = temp;
-    heap(array, (curr-1)/2);
+    array[curr] = array[(int) floor((curr-1)/2)];
+    array[(int) floor((curr-1)/2)] = temp;
+    int newcurr = (int) floor((curr-1)/2);
+    heap(array, newcurr);
   }
 }
