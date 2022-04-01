@@ -12,6 +12,8 @@ void manuallyAdd(int* array, int &curr);
 void heap(int* array, int &curr);
 void print(int* array);
 void addFile(int* array, int &curr);
+void display(int index, int* array, int depth, int size);
+void remove();
 
 int main() {
   srand(time(0));
@@ -23,7 +25,7 @@ int main() {
   }
   bool playing = true;
    while (playing == true) {//While loop
-    cout << "would you like to add from a file(ADD), Manualy add(TYPE), print(PRINT), display(DISPLAY), or quit(QUIT)" << endl;
+    cout << "would you like to add from a file(ADD), Manualy add(TYPE), print(PRINT), display(DISPLAY), remove from heap(REMOVE), or quit(QUIT)" << endl;
     char input[10];
     cin >> input;
     if (strcmp(input, "ADD") == 0) {//Calls the add function
@@ -33,10 +35,13 @@ int main() {
       manuallyAdd(array, curr);
     }
     else if (strcmp(input, "DISPLAY") == 0) {//Calls display function
-      
+      display(0, array, 0, curr);
     }
     else if (strcmp(input, "PRINT") == 0) {//Calls the print function
       print(array);
+    }
+    else if (strcmp(input, "REMOVE") == 0) {
+      
     }
     else if (strcmp(input, "QUIT") == 0) {//Returns false
       playing = false;//Exits while Loop stopping game
@@ -46,7 +51,10 @@ int main() {
 }
 
 void addFile(int* array, int &curr) {
-  for (int i = 0; i < 100; i++) {
+  cout << "how many numbers to add" << endl;
+  int input;
+  cin >> input;
+  for (int i = 0; i < input; i++) {
     char input[10];
     char tempString[10];
     int count = 1;
@@ -83,13 +91,29 @@ void manuallyAdd(int* array, int &curr) {
 
 }
 
-void display(int* array) {
-  
+void display(int index, int* array, int depth, int size) {
+  if (index*2 + 2 <= size && array[index*2 + 2] != 0) {
+    display(index*2 + 2, array, depth + 1, size);
+  }
+  for (int i = 0; i < depth; i++) {
+    cout << "\t";
+  }
+  cout << array[index] << endl;
+  if (index*2 + 1 <= size && array[index*2 + 1] != 0) {
+    display(index*2 + 1, array, depth + 1, size);
+  }
 }
 
 void print(int* array) {
   for (int i = 0; i < 100; i ++) {
     cout << array[i] << endl;
+  }
+}
+
+void remove(int* array, int size) {
+  int newarray[100];
+  for (int i = 0; i < 100; i++) {
+    
   }
 }
 
